@@ -2,10 +2,17 @@
 title: Package status dashboard
 ---	
 
+<style>
+.tablelines table, .tablelines td, .tablelines th {
+        border: 1px solid black;
+        }
+</style>
+
 ## Overview	
-This is a central indexing page for all [Bioconductor](https://bioconductor.org) software packages managed by me, 
+This is a central indexing page for all [Bioconductor](https://bioconductor.org) software packages managed by me
  
 ## Packages for which I am the primary maintainer	
+
 | Name |  BioC-devel | BioC-release | 	
 |:----------------:|:----------------:|:----------------:|	
 | [biomaRt](https://github.com/grimbough/biomaRt) | [![Bioconductor-devel Build Status](http://bioconductor.org/shields/build/devel/bioc/biomaRt.svg)](http://bioconductor.org/checkResults/devel/bioc-LATEST/biomaRt) | [![Bioconductor-devel Build Status](http://bioconductor.org/shields/build/release/bioc/biomaRt.svg)](http://bioconductor.org/checkResults/release/bioc-LATEST/biomaRt) |	
