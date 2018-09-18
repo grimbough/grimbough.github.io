@@ -9,6 +9,9 @@ title: Package status dashboard
 td {
         width: 33%;
         }
+#downloads {
+        display: none;
+        }
 </style>
 
 ## Overview	
