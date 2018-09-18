@@ -5,6 +5,7 @@ title: Package status dashboard
 <style>
 .tablelines table, .tablelines td, .tablelines th {
         border: 1px solid black;
+        padding: 1px;
         }
 td {
         width: 33%;
