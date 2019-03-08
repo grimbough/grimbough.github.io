@@ -1,6 +1,5 @@
 ---
 redirect_from: "/foo/"
-redirect_from: "/2017/06/23/download-file"
 ---
 
 I recently responded to this post on the Bioconductor forum regarding a problem with reading a HDF5 file using the rhdf5 package.  I was initially unable to reproduce the problem until I tried on Windows, then it failed immediately.  Here’s an examination of why.
@@ -29,13 +28,15 @@ download.file(url = file_url,
 
 The output that is printed to screen is identical, so I'll include it only once.  Note that the file is of length 8072 bytes. I’ve no idea what that content type represents, it’s simply listed as 'unknown' on other platforms.
 
+```
 trying URL 'http://support.hdfgroup.org/ftp/HDF5/examples/files/exbyapi/h5ex_d_sofloat.h5'
 Content type ' â³7û ' length 8072 bytes
 downloaded 8072 bytes
+```
 
 Now we’ll do two operations on the downloaded files; We’ll ask for the size of the file, and then we’ll try to list the contents.  First the ‘text’ version:
 
-```
+```r
 > file.size(h5_text_dl)
 [1] 8137
 > h5ls(h5_text_dl)
@@ -43,7 +44,7 @@ Now we’ll do two operations on the downloaded files; We’ll ask for the size 
   HDF5. File accessability. Unable to open file.
 ```
 
-```
+```r
 > file.size(h5_binary_dl)
 [1] 8072
 > h5ls(h5_binary_dl)
