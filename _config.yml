@@ -1,5 +1,5 @@
 remote_theme: "mmistakes/minimal-mistakes@4.15.2"
-theme: minimal-mistakes-jekyll
+#theme: minimal-mistakes-jekyll
 minimal_mistakes_skin: dark
 
 paginate: 5 # amount of posts to show
@@ -26,6 +26,7 @@ author:
 
 plugins:
   - jekyll-redirect-from
+  - jekyll-include-cache
 
 defaults:
   # _posts
