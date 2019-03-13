@@ -2,6 +2,7 @@
 #redirect_from: "/2017/06/23/download-file"
 layout: single
 title: Default behaviour of `download.file()` on Windows
+classes: wide
 ---
 
 I recently responded to this post on the Bioconductor forum regarding a problem with reading a HDF5 file using the rhdf5 package.  I was initially unable to reproduce the problem until I tried on Windows, then it failed immediately.  Here’s an examination of why.
