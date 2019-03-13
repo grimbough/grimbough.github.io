@@ -1,0 +1,466 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.15.2 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Using your own version of libxml2 in R - R Musing</title>
+<meta name="description" content="My previous post here discussed how to build recent versions of R on an old machine that has outdated system libraries.  Similarly, sometimes you can get the core parts of R work, but one of the packages you’re trying to use fails to work as you’d expect.  Once such example was posted on the Bioconductor support forum here, where the XML package seems to install just fine but the parseURI() function doesn’t work.">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="R Musing">
+<meta property="og:title" content="Using your own version of libxml2 in R">
+<meta property="og:url" content="http://localhost:4000/2017/03/06/using-your-own-version-of-libxml2-in-r.html">
+
+
+  <meta property="og:description" content="My previous post here discussed how to build recent versions of R on an old machine that has outdated system libraries.  Similarly, sometimes you can get the core parts of R work, but one of the packages you’re trying to use fails to work as you’d expect.  Once such example was posted on the Bioconductor support forum here, where the XML package seems to install just fine but the parseURI() function doesn’t work.">
+
+
+
+
+
+  <meta name="twitter:site" content="@grimbough">
+  <meta name="twitter:title" content="Using your own version of libxml2 in R">
+  <meta name="twitter:description" content="My previous post here discussed how to build recent versions of R on an old machine that has outdated system libraries.  Similarly, sometimes you can get the core parts of R work, but one of the packages you’re trying to use fails to work as you’d expect.  Once such example was posted on the Bioconductor support forum here, where the XML package seems to install just fine but the parseURI() function doesn’t work.">
+  <meta name="twitter:url" content="http://localhost:4000/2017/03/06/using-your-own-version-of-libxml2-in-r.html">
+
+  
+    <meta name="twitter:card" content="summary">
+    
+  
+
+  
+
+
+
+  <meta property="article:published_time" content="2017-03-06T00:00:00+01:00">
+
+
+
+
+
+
+<link rel="canonical" href="http://localhost:4000/2017/03/06/using-your-own-version-of-libxml2-in-r.html">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="R Musing Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE ]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">R Musing</a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/dashboard.html" >Package Dashboard</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="https://s.gravatar.com/avatar/596fcf79708da70488a96ac9441c98fc?s=120" alt="Mike L. Smith" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Mike L. Smith</h3>
+    
+    
+      <p class="author__bio" itemprop="description">
+        I’m a bioinformatician working at EMBL Heidelberg as part of the German Network for Bioinformatics Infrastructure (de.NBI).
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Heidelberg, DE</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="https://twitter.com/grimbough" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+          
+        
+          
+            <li><a href="https://github.com/grimbough" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Using your own version of libxml2 in R">
+    <meta itemprop="description" content="My previous post here discussed how to build recent versions of R on an old machine that has outdated system libraries.  Similarly, sometimes you can get the core parts of R work, but one of the packages you’re trying to use fails to work as you’d expect.  Once such example was posted on the Bioconductor support forum here, where the XML package seems to install just fine but the parseURI() function doesn’t work.">
+    <meta itemprop="datePublished" content="March 06, 2017">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Using your own version of <code class="highlighter-rouge">libxml2</code> in R
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p>My previous post <a href="http://www.msmith.de/2017/03/03/30/">here</a> discussed how to build recent versions of R on an old machine that has outdated system libraries.  Similarly, sometimes you can get the core parts of R work, but one of the packages you’re trying to use fails to work as you’d expect.  Once such example was posted on the Bioconductor support forum <a href="https://support.bioconductor.org/p/93152/">here</a>, where the XML package seems to install just fine but the parseURI() function doesn’t work.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">XML</span><span class="p">)</span><span class="w">
+</span><span class="n">XML</span><span class="o">::</span><span class="n">parseURI</span><span class="p">(</span><span class="s2">""</span><span class="p">)</span><span class="o">&lt;/</span><span class="n">textarea</span><span class="o">&gt;&lt;/</span><span class="n">div</span><span class="o">&gt;</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt;  Error in XML::parseURI("") : cannot parse URI
+</code></pre></div></div>
+
+<p>It turns out the root cause of this is the system version of libxml2 is extremely old. So we’re going to download, compile and then get R to use a more up-to-date version.</p>
+
+<h2 id="libxml2-installation">libxml2 installation</h2>
+
+<p>In the same style as with building R, I use a folder called src to hold the downloaded library, and plan to install it in a folder called usr. Both of these are located in my home directory. Below are the steps I used to build my own version of libxml2. Lines 1-4 download and extract the source files. Line 5 configures the compilation; we use the –prefix argument to tell it we’re want the final installation to be put in that location. I also choose to remove support for python here, it was leading to errors trying to write to locations I didn’t have permissions for, and since I didn’t need python support this seemed OK to me. The final line executes the compilation and then copies the results into the appropriate locations.</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> <span class="nv">$HOME</span>/src
+wget http://xmlsoft.org/sources/libxml2-2.9.4.tar.gz
+<span class="nb">tar </span>xzf libxml2-2.9.4.tar.gz
+<span class="nb">cd</span> <span class="nv">$HOME</span>/src/libxml2-2.9.4
+./configure <span class="nt">--prefix</span><span class="o">=</span><span class="nv">$HOME</span>/usr <span class="nt">--without-python</span>
+make &amp;amp<span class="p">;</span>&amp;amp<span class="p">;</span> make <span class="nb">install</span>
+</code></pre></div></div>
+
+<p>We then need to reinstall the library in R and then test the previously broken function.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span><span class="w"> </span><span class="n">install.packages</span><span class="p">(</span><span class="s1">'XML'</span><span class="p">)</span><span class="w">
+</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span><span class="w"> </span><span class="n">XML</span><span class="o">::</span><span class="n">parseURI</span><span class="p">(</span><span class="s2">""</span><span class="p">)</span><span class="w">
+</span><span class="o">$</span><span class="n">scheme</span><span class="w">
+</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="s2">""</span><span class="w">
+
+</span><span class="o">$</span><span class="n">authority</span><span class="w">
+</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="s2">""</span><span class="w">
+
+</span><span class="o">$</span><span class="n">server</span><span class="w">
+</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="s2">""</span><span class="w">
+
+</span><span class="o">$</span><span class="n">user</span><span class="w">
+</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="s2">""</span><span class="w">
+
+</span><span class="o">$</span><span class="n">path</span><span class="w">
+</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="s2">""</span><span class="w">
+
+</span><span class="o">$</span><span class="n">query</span><span class="w">
+</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="s2">""</span><span class="w">
+
+</span><span class="o">$</span><span class="n">fragment</span><span class="w">
+</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="s2">""</span><span class="w">
+
+</span><span class="o">$</span><span class="n">port</span><span class="w">
+</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="kc">NA</span><span class="w">
+
+</span><span class="nf">attr</span><span class="p">(,</span><span class="s2">"class"</span><span class="p">)</span><span class="w">
+</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="s2">"URI"</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="what-if-things-still-arent-working">What if things still aren’t working?</h2>
+
+<p>If you’re still getting the error, you can check exactly which copy of the xml library you’re linking against using the following code.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">XML</span><span class="p">)</span><span class="w">
+</span><span class="n">path</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">unclass</span><span class="p">(</span><span class="n">getLoadedDLLs</span><span class="p">()</span><span class="w">
+</span><span class="p">[[</span><span class="s2">"XML"</span><span class="p">]])</span><span class="o">$</span><span class="n">path</span><span class="w">
+</span><span class="n">system2</span><span class="p">(</span><span class="s2">"ldd"</span><span class="p">,</span><span class="w"> </span><span class="n">args</span><span class="o">=</span><span class="n">path</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>linux-vdso.so.1 =&gt;  (0x00007fffb9dfd000)
+libxml2.so.2 =&gt; /home/mike/usr/lib/libxml2.so.2 (0x00002b823be13000)
+libz.so.1 =&gt; /home/mike/usr/lib/libz.so.1 (0x00002b823c161000)
+libm.so.6 =&gt; /lib64/libm.so.6 (0x00002b823c38c000)
+libdl.so.2 =&gt; /lib64/libdl.so.2 (0x00002b823c60f000)
+libc.so.6 =&gt; /lib64/libc.so.6 (0x00002b823c814000)
+/lib64/ld-linux-x86-64.so.2 (0x0000003246c00000)
+</code></pre></div></div>
+
+<p>You can see in line 2 of the output above I’m using the version in my home directory. If this entry is something like <code class="highlighter-rouge">/usr/lib/libxml2.so.2</code> you’re still using the system library and you might want to look at the suggestions below.</p>
+
+<p>There are a few places problems could arise if you’ve skipped some steps, particularly if you didn’t install R in the same way I did previously. For example there’s the entries in my $PATH environment variable, which are shown below:</p>
+
+<p><code class="highlighter-rouge">/home/mike/usr/bin:/usr/kerberos/bin:/usr/local/bin:/usr/bin:/bin:/usr/X11R6/bin</code></p>
+
+<p>You can see this includes <code class="highlighter-rouge">/home/mike/usr/bin</code>. When libxml2 was installed, it placed a script called xml2-config in this folder. This script is then run when you install the XML R package, and helps with the setup. If you haven’t added the equivalent of <code class="highlighter-rouge">/home/mike/usr/bin</code> to your path one of two things will happen. Either:</p>
+
+<ul>
+  <li>xml2-config won’t be found and the package installation will fail, or</li>
+  <li>An older version somewhere else on the system will be found, the installation will proceed, but you’ll still encounter the original error.</li>
+</ul>
+
+<p>There are few things you can do to get around this. The simplest is to add the appropriate location to your <code class="highlighter-rouge">$PATH</code> as I’ve done. Alternatively, you can manually supply the location of xml2-config during package installation like so:</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">install.packages</span><span class="p">(</span><span class="s2">"XML"</span><span class="p">,</span><span class="w"> 
+        </span><span class="n">configure.args</span><span class="o">=</span><span class="s1">'--with-xml-config="$HOME/usr/bin/xml2-config"'</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="acknowledgements">Acknowledgements</h3>
+
+<p>Thanks to Bioconductor user JunLVI for asking this question and experimenting with various suggestions, and Martin Morgan for demonstrating a number of strategies for debugging this.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2017-03-06T00:00:00+01:00">March 06, 2017</time></p>
+        
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="#" class="pagination--pager disabled">Previous</a>
+    
+    
+      <a href="/2017/06/23/r-download-file.html" class="pagination--pager" title="Default behaviour of download.file() on Windows
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You May Also Enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2017/06/23/r-download-file.html" rel="permalink">Default behaviour of <code class="highlighter-rouge">download.file()</code> on Windows
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">I recently responded to this post on the Bioconductor forum regarding a problem with reading a HDF5 file using the rhdf5 package.  I was initially unable to ...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2019 Mike L. Smith. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script data-search-pseudo-elements defer src="https://use.fontawesome.com/releases/v5.7.1/js/all.js" integrity="sha384-eVEQC9zshBn0rFj4+TU78eNA19HMNigMviK/PU/FFjLXqa/GKPgX58rvt5Z8PLs7" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+  </body>
+</html>

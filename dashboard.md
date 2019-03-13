@@ -1,27 +1,24 @@
 ---	
 title: Package status dashboard
+layout: single
 ---	
 
 <style>
 .tablelines table, .tablelines td, .tablelines th {
         border: 1px solid black;
         }
+table {
+    display: table;
+}
 td {
         width: 33%;
         padding: 1px;
         }
-#downloads {
-        display: none;
-        }
-header {
-        margin-bottom: 10px;
-        }
 </style>
 
-## Overview	
-This is a central indexing page for all [Bioconductor](https://bioconductor.org) software packages managed by me
+This is a central indexing page for all [Bioconductor](https://bioconductor.org) software packages managed by me.
  
-## Packages for which I am the primary maintainer	
+## Primary maintainer	
 
 | Name |  BioC-devel | BioC-release | 	
 |:----------------:|:----------------:|:----------------:|	
@@ -33,8 +30,7 @@ This is a central indexing page for all [Bioconductor](https://bioconductor.org)
 | [BiocWorkflowTools](https://github.com/grimbough/BiocWorkflowTools) | [![Bioconductor-devel Build Status](http://bioconductor.org/shields/build/devel/bioc/BiocWorkflowTools.svg)](http://bioconductor.org/checkResults/devel/bioc-LATEST/BiocWorkflowTools) | [![Bioconductor-release Build Status](http://bioconductor.org/shields/build/release/bioc/BiocWorkflowTools.svg)](http://bioconductor.org/checkResults/release/bioc-LATEST/BiocWorkflowTools) |
 | BiocMetaWorkflow | [![Bioconductor-release Build Status](https://bioconductor.org/shields/build/devel/workflows/BiocMetaWorkflow.svg)](http://bioconductor.org/checkResults/devel/workflows-LATEST/BiocMetaWorkflow/) | [![Bioconductor-devel Build Status](https://bioconductor.org/shields/build/release/workflows/BiocMetaWorkflow.svg)](http://bioconductor.org/checkResults/release/workflows-LATEST/BiocMetaWorkflow/)
 
-
-## Packages that I have contributed to
+## Contributor
  
 | Name |  BioC-devel | BioC-release | 	
 |:----------------:|:----------------:|:----------------:|	
