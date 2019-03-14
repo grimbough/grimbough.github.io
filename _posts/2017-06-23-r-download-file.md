@@ -1,5 +1,5 @@
 ---
-#redirect_from: "/2017/06/23/download-file"
+redirect_from: "/2017/06/23/download-file/"
 layout: single
 title: Default behaviour of `download.file()` on Windows
 classes: wide

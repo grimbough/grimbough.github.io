@@ -1,4 +1,5 @@
 ---
+redirect_from: "/2018/11/27/download-file/"
 title: Exploring performance when extracting subsets from HDF5
 ---
 
