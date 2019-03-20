@@ -2,6 +2,10 @@
 redirect_from: "/2018/05/01/parallel-r-hdf5/"
 layout: single
 title: Parallel processing with R and HDF5
+tags:
+    - r
+    - hdf5
+    - parallel processing
 ---
 
 I just got back from a great week at the CZI meeting/workshop/hackathon to mark the start of the ‘Collaborative Computational Tools for the Human Cell Atlas’ project. One topic that came up frequently was the suitability of various file formats for storing single-cell data. Of particular interest to me was whether it is practical (or indeed possible) to perform parallel processing on data stored in HDF5 files from within R.

@@ -1,6 +1,10 @@
 ---
 redirect_from: "/2018/11/27/download-file/"
 title: Exploring performance when extracting subsets from HDF5
+tags:
+    - r
+    - hdf5
+    - parallel processing
 ---
 
 One of the cool features about the HDF5 file format is the ability to read subsets of the data without (necessarily) having to read the entire file, keeping both the memory usage and execution times of these operations to a minimum. However this is not always as performant as one might hope. This may be due to bottlenecks when working with data on-disk rather than in memory, or idiosyncrasies in either the HDF5 library itself or the rhdf5 package. Here we investigate some of the possible bottlenecks.
