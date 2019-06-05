@@ -12,7 +12,7 @@ Many different people suggested strategies, and it turns out there are quite a l
 
 ## UCSC
 
-First well start with methods for getting the chromosome lengths from UCSC.  
+First we'll start with methods for getting the chromosome lengths from UCSC.  
 
 ### **GenomicFeatures** ([Martin Morgan](https://community-bioc.slack.com/team/U37PBKU0K))
 
