@@ -1,5 +1,4 @@
 remote_theme: "mmistakes/minimal-mistakes@4.15.2"
-#theme: minimal-mistakes-jekyll
 minimal_mistakes_skin: dark
 
 paginate: 5 # amount of posts to show
@@ -8,16 +7,18 @@ paginate_path: /page:num/
 # Site Settings
 locale: "en-UK"
 title: "R Musing"
-
 name: "Mike L. Smith"
+
 twitter:
   username: "grimbough"
+og_image: /assets/images/rhdf5.png
 
 # Site Author
 author:
   name     : "Mike L. Smith"
   avatar   : "https://s.gravatar.com/avatar/596fcf79708da70488a96ac9441c98fc?s=120"
-  bio      : "I’m a bioinformatician working at EMBL Heidelberg as part of the German Network for Bioinformatics Infrastructure (de.NBI)."
+  bio      : "I’m a bioinformatician working at EMBL Heidelberg as part of the German Network for Bioinformatics Infrastructure (de.NBI).<br><br>
+  I mostly contribute code to, and maintain packages within, the Bioconductor project."
   location : "Heidelberg, DE"
   links:
     - label: "Twitter"
@@ -37,6 +38,7 @@ include:
   - _pages
 exclude:
   - "*.Rproj"
+  - ".Rproj.user"
 
 defaults:
   # _posts
