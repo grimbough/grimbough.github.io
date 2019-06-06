@@ -2,6 +2,8 @@
 title: Obtaining chromosome lengths in Bioconductor
 tags:
     - bioconductor
+header:
+  og_image: /assets/images/bioc-question-1.png
 ---
 
 The following question was asked in the Bioconductor [slack channel](https://community-bioc.slack.com/)
