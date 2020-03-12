@@ -7,7 +7,7 @@ paginate_path: /page:num/
 # Site Settings
 locale: "en-UK"
 title: "R Musing"
-logo: /assets/images/msmith-logo-mid.png
+#logo: /assets/images/msmith-logo-dark.png
 description: "A loose collection of posts about R"
 name: "Mike L. Smith"
 
