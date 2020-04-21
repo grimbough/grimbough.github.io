@@ -1,7 +1,7 @@
 ---
 title: Obtaining chromosome lengths in Bioconductor
 tags:
-    - bioconductor
+    - Bioconductor
 header:
   og_image: /assets/images/bioc-question-1-twitter.png
 ---
