@@ -5,7 +5,7 @@ tags:
     - Bioconductor
     - R Markdown
 header:
-  og_image: /assets/images/BiocStyle.png
+  teaser: /assets/images/BiocStyle.jpg
 ---
 
 Until recently **BiocStyle** didn't render particularly nicely on narrow screens e.g. if you're reading a vignette on a phone screen.  The left and right margins dominate and compress the main content to be almost unreadably narrow e.g.
