@@ -4,7 +4,9 @@ tags:
     - R
 ---
 
+One of the major changes in R 4.0.0 is the s
 
+> Reference counting is now used instead of the NAMED mechanism for determining when objects can be safely mutated in base C code. This reduces the need for copying in some cases and should allow further optimizations in the future.
 
 ```r
 set.seed(1)
