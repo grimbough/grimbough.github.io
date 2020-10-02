@@ -6,7 +6,7 @@ tags:
     - curl
     - ssl
 header:
-  teaser: /assets/images/curl-logo.png
+  teaser: /assets/images/curl-logo.jpg
 excerpt: "A client side fix for SSL issues with httr and Ensembl"
 ---
 
