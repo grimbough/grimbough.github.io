@@ -6,6 +6,7 @@ tags:
     - R Markdown
 header:
   teaser: /assets/images/BiocStyle.jpg
+excerpt: "Until recently **BiocStyle** didn't render particularly nicely on narrow screens.  We detail some improvements."
 ---
 
 Until recently **BiocStyle** didn't render particularly nicely on narrow screens e.g. if you're reading a vignette on a phone screen.  The left and right margins dominate and compress the main content to be almost unreadably narrow e.g.

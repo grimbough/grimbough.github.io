@@ -1,5 +1,5 @@
 ---
-title: httr, curl, and ssl problems on Ubuntu 20.04
+title: httr, cURL, and SSL problems on Ubuntu 20.04
 tags:
     - R
     - httr
@@ -7,12 +7,12 @@ tags:
     - ssl
 header:
   teaser: /assets/images/curl-symbol.png
-excerpt: "Fixing SSL issues with httr and Ensembl"
+excerpt: "A client side fix for SSL issues with httr and Ensembl"
 ---
 
 # The problem
 
-The introduction of an Ubuntu 20.04 based computer to the Bioconductor build system highlighted an incompatibility between that distribtion and R code trying to access resources hosted by Ensembl e.g. the Ensembl REST API, BioMart, or RFAM.
+The introduction of an Ubuntu 20.04 based computer to the Bioconductor build system highlighted an incompatibility between that distribtion and R code trying to access resources hosted by [Ensembl](https://www.ensembl.org) e.g. the Ensembl REST API, BioMart, or RFAM.
 
 Code example in these packages ran fine on the other test machines, but were failing to build on Ubuntu 20.04 with the following error:
 
