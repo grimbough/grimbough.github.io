@@ -6,7 +6,8 @@ tags:
     - curl
     - ssl
 header:
-  teaser: /assets/images/BiocStyle.jpg
+  teaser: /assets/images/curl-symbol.png
+excerpt: "Fixing ssl issues with httr and Ensembl"
 ---
 
 # The problem
@@ -90,5 +91,5 @@ httr_config <- switch(Sys.info()["sysname"],
                       config())
 ```
 
-It's not clear to me whether this will be appropriate across all distributions, but it seem to have allowed Ubuntu 20.04 to access the Ensembl website and shown no ill effects on Ubuntu 16.04 and 18.04.
+It's not clear whether this will be appropriate across all distributions, but it seems to have allowed Ubuntu 20.04 to access the Ensembl website and shown no ill effects on Ubuntu 16.04 and 18.04.
 
