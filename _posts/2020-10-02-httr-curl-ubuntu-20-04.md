@@ -7,7 +7,7 @@ tags:
     - ssl
 header:
   teaser: /assets/images/curl-symbol.png
-excerpt: "Fixing ssl issues with httr and Ensembl"
+excerpt: "Fixing SSL issues with httr and Ensembl"
 ---
 
 # The problem
