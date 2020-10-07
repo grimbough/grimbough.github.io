@@ -1,5 +1,5 @@
 ---
-title: httr, cURL, and SSL problems on Ubuntu 20.04
+title: Solving httr, cURL, and SSL problems on Ubuntu 20.04
 tags:
     - R
     - httr
