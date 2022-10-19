@@ -5,7 +5,7 @@ tags:
     - quarto
 header:
   teaser: /assets/images/quarto-links-teaser.png
-  og_image: /assets/images/link-icon.png
+  og_image: /assets/images/link-icon-white.png
 excerpt: "Quarto doesn't add anchor links to equations by default, but you can add them yourself"
 ---
 
