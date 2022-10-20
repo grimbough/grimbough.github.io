@@ -14,10 +14,10 @@ twitter:
 og_image: /assets/images/msmith-logo.png
 
 analytics:
-  provider: "google-gtag"
+  provider: "google"
   google:
     tracking_id: "UA-93076445-1"
-    anonymize_ip: false # default
+    anonymize_ip: true # default
 
 # Site Author
 author:
